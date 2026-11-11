@@ -1,0 +1,1302 @@
+[
+  {
+    "reportId": "R005",
+    "questionId": "68dea616d0cda73d07e93ae6",
+    "verdict": "defect",
+    "repair": "answer_key",
+    "edit": {
+      "field": "answer",
+      "find": "2",
+      "replace": "1"
+    },
+    "route": "faculty_review",
+    "confidence": 0.94,
+    "evidence": {
+      "claim": "The stored answer key appears inconsistent with the supplied solution.",
+      "questionEvidence": "The question defines total flux as n q/(2 ε₀).",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The supplied solution ends with total flux q/(2 ε₀), which corresponds to n = 1 in the question's stated form. The stored answer is 2.",
+      "reasoning": "The discrepancy follows by comparing the supplied solution's final expression with the question's expression; this is not an independent verification.",
+      "safety": "Changing an answer key is high stakes. The suggested edit requires faculty approval and must not be applied automatically.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "answer_key",
+    "verificationChecks": [
+      "Compared the total-flux expression in the question with the final expression in the supplied solution.",
+      "The supplied solution's final expression has coefficient 1 in the form q/(2 ε₀), while the stored answer is 2.",
+      "No independent calculation or live-record check was performed."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R029",
+    "questionId": "68e8734442c06737d6e56da4",
+    "verdict": "no_error",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.9,
+    "evidence": {
+      "claim": "Student claims μ should be 0.4; the stored key (A, 0.8) appears correct from the stem's own numbers.",
+      "questionEvidence": "Weight 100 N → m = 10 kg (g = 10 m/s²). Case 1: F − μ·100 = 10·1 = 10. Case 2: 2F − μ·100 = 10·10 = 100.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "Stored answer A = 0.8 agrees with the arithmetic above; student's 0.4 does not.",
+      "reasoning": "The student likely dropped a factor of 2 when doubling the force or mis-substituted. The record is internally consistent and the key is supported by the stem values.",
+      "safety": "No answer-key change proposed. Arithmetic is shown explicitly; no external or live-record verification was performed.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for letting us know. We could not confirm a defect from the available evidence; share your working if you would like faculty to recheck it.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "m = W/g = 100/10 = 10 kg",
+      "Case 1: F − 100μ = 10",
+      "Case 2: 2F − 100μ = 100",
+      "Substitute F = 10 + 100μ → 20 + 200μ − 100μ = 100",
+      "100μ = 80 → μ = 0.8, matching option (A)"
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R012",
+    "questionId": "61dffbec08489156b684bd22",
+    "verdict": "defect",
+    "repair": "spelling",
+    "edit": {
+      "field": "question",
+      "find": "Epithellial tisue",
+      "replace": "Epithelial tissue"
+    },
+    "route": "faculty_review",
+    "confidence": 0.99,
+    "evidence": {
+      "claim": "Option A contains spelling errors.",
+      "questionEvidence": "The question text contains the exact phrase “Epithellial tisue” in option A.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is A, matching the option identified in the report; no answer-key change is proposed.",
+      "reasoning": "The exact option text has misspellings of “Epithelial tissue.”",
+      "safety": "The edit changes words only and does not alter values, symbols, or answer choices.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "spelling",
+    "verificationChecks": [
+      "Confirmed the reported phrase appears in the supplied question field.",
+      "Confirmed the proposed find string is an exact substring of the question field.",
+      "Confirmed the replacement corrects spelling without changing the option's meaning."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R002",
+    "questionId": "60f744b3f1b9bc7cc7b4a949",
+    "verdict": "defect",
+    "repair": "answer_key",
+    "edit": {
+      "field": "answer",
+      "find": "C",
+      "replace": "A"
+    },
+    "route": "faculty_review",
+    "confidence": 0.98,
+    "evidence": {
+      "claim": "The stored answer key is inconsistent with the supplied solution and options.",
+      "questionEvidence": "Options include (A) 50 V and (C) 130 V. The supplied solution computes V = sqrt(40^2 + (60 - 30)^2) = 50 V.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "Stored answer is C, corresponding to 130 V, but the solution ends at 50 V and option A is 50 V.",
+      "reasoning": "The solution and option A agree on 50 V, while the stored key selects C. This is an answer-key mismatch, not a student misread.",
+      "safety": "Answer-key changes are high stakes. This is a proposed correction only; faculty must approve before any write.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "answer_key",
+    "verificationChecks": [
+      "Checked supplied solution: sqrt(40^2 + (60 - 30)^2) = 50 V.",
+      "Checked options: option A is 50 V; option C is 130 V.",
+      "Checked stored answer: C, which conflicts with the supplied solution's 50 V.",
+      "Did not perform an independent solve or live-record check."
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R004",
+    "questionId": "68e870ef42c06737d6e565c4",
+    "verdict": "defect",
+    "repair": "answer_key",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.99,
+    "evidence": {
+      "claim": "The stored answer key does not match the solution's stated result or the options.",
+      "questionEvidence": "Option A is 4556 N/m²; option D is 4800 N/m².",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored key is A, while the supplied solution states 4800 N/m², which is option D. The student's proposed 8225 N/m² does not match the supplied calculation.",
+      "reasoning": "The answer key conflicts with both the solution result and its corresponding option. Because an answer-key change is high stakes, faculty review is required.",
+      "safety": "No change to the answer key is proposed.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "answer_key",
+    "verificationChecks": [
+      "Identified option A as 4556 N/m² and option D as 4800 N/m² in the supplied question.",
+      "Evaluated the supplied formula with the stated density and rms speed: (1/3) × 0.09 × 160000 = 4800.",
+      "Compared the calculated result with the stored key A and the student's proposed value 8225."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R008",
+    "questionId": "60f742f6660d187cc13a8078",
+    "verdict": "defect",
+    "repair": "stem_data",
+    "edit": {
+      "field": "question",
+      "find": "an inductance are connected",
+      "replace": "an inductance of 95.5 mH is connected"
+    },
+    "route": "faculty_review",
+    "confidence": 0.91,
+    "evidence": {
+      "claim": "The question omits the inductance value needed to determine the impedance.",
+      "questionEvidence": "The stem gives a resistance of 40 ohm and a frequency of 50 cycles/second, but does not specify the inductance.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is C (50 ohm). The solution also states 50 ohm, but that agreement does not independently verify the answer.",
+      "reasoning": "The solution's explicit inductance value supports adding 95.5 mH to the stem; without it, the question lacks data to determine a unique impedance.",
+      "safety": "The proposed edit supplies a value already present in the solution. The answer key is not changed; its mathematical correctness remains unverified.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "stem_data",
+    "verificationChecks": [
+      "Checked the supplied stem: no inductance value is stated.",
+      "Checked the supplied solution: it uses 95.5 × 10^-3 as the inductance.",
+      "Did not independently calculate the impedance or validate the answer key."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R034",
+    "questionId": "695ee00b88d7701e561aabc5",
+    "verdict": "defect",
+    "repair": "answer_key",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.96,
+    "evidence": {
+      "claim": "The supplied solution contradicts itself: its calculation supports the assertion, while its final explanation labels the assertion false and retains answer D.",
+      "questionEvidence": "The assertion concerns equal-amplitude waves with phase difference π/2. The reason says resultant intensity is always the sum of individual intensities whenever the phase difference is non-zero.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is D, which represents A false and R true. This conflicts with the solution's own statement that A is true. Whether the reason is false and which option should be keyed requires faculty confirmation.",
+      "reasoning": "There is a clear internal contradiction in the solution and a resulting answer-key concern. Answer-key changes are high stakes, so no replacement key is proposed.",
+      "safety": "No edit is made because changing the answer key requires faculty review, and the mathematical conclusion has not been independently verified.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "answer_key",
+    "verificationChecks": [
+      "Compared the stored answer D with the solution's explicit statement that the assertion is true; these conflict.",
+      "Checked the supplied solution's displayed calculation and later conclusion; the text gives I = I₀, then calls the assertion true, but later calls it false.",
+      "Did not independently verify the correct option or the truth value of the reason."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R010",
+    "questionId": "622f08d7b70e4b50e4500a1b",
+    "verdict": "not_actionable",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.68,
+    "evidence": {
+      "claim": "The report says only three options are showing and suggests option D is missing.",
+      "questionEvidence": "The supplied question record contains options (A), (B), and (C), with no option (D).",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is C, which is among the three displayed options. This does not establish whether another option was intended.",
+      "reasoning": "The report matches the supplied record's three-option count, but the record alone does not show that option D is missing rather than that the question was authored with three options.",
+      "safety": "Do not create an option or change the answer key without evidence. The intended option count remains unverified.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for reporting this. Please add the question detail, expected answer, or steps you took so faculty can investigate.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Counted the options in the supplied question text: A, B, and C.",
+      "Compared the stored answer C with the listed options; C is present.",
+      "Could not determine from the supplied record whether an option D was intended."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R017",
+    "questionId": "6208e80a9cb2ab67dac61bd0",
+    "verdict": "no_error",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.86,
+    "evidence": {
+      "claim": "Student reports a spelling mistake: the word 'mere' appears in the options.",
+      "questionEvidence": "The supplied options use 'more' in A-D: 'receive more red light', 'more blue light', 'more green light', 'more white light'. The exact substring 'mere' does not appear in the stored question text.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "Stored answer is C. The supplied solution says herbs and shrubs receive more green light and therefore have comparatively low photosynthesis, which is directly consistent with option C in the record.",
+      "reasoning": "The reported spelling string is absent from the stored options, and 'more' is correctly spelled. No minimal text repair is available or needed for the reported issue.",
+      "safety": "The student comment and all HTML were treated as untrusted data; no instructions inside them were followed.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for letting us know. We could not confirm a defect from the available evidence; share your working if you would like faculty to recheck it.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Checked supplied question text for exact substring 'mere': not present.",
+      "Checked options A-D: all use 'more', which is correctly spelled in context.",
+      "Compared stored answer C with supplied solution wording: consistent within the record.",
+      "No independent answer-key verification performed; no live-record check performed."
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R032",
+    "questionId": "68dea7c2387eea3d0d95f9bb",
+    "verdict": "no_error",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.93,
+    "evidence": {
+      "claim": "The student compares the solution's 0.08 m with the keyed answer 8, which is requested in cm.",
+      "questionEvidence": "The question asks for the shift in cm.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is 8; the solution's final value is 0.08 m, equivalent to 8 cm.",
+      "reasoning": "The apparent mismatch is explained by the difference in units. No content edit is indicated based on the supplied record.",
+      "safety": "No answer-key change is proposed. The calculation leading to 0.08 m has not been independently verified.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for letting us know. We could not confirm a defect from the available evidence; share your working if you would like faculty to recheck it.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Confirmed the question requests the shift in cm.",
+      "Converted the solution's stated 0.08 m to cm: 0.08 × 100 = 8 cm.",
+      "Did not independently verify the preceding physics calculation."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R026",
+    "questionId": "620e23cecc50543bc7db9186",
+    "verdict": "not_actionable",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.91,
+    "evidence": {
+      "claim": "The student reports that the question is outside the NEET syllabus.",
+      "questionEvidence": "The question concerns inferring an ancestral trait among related snake species using a more distantly related snake.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is B, matching the option about examining a more distantly related snake. This comparison does not establish syllabus status.",
+      "reasoning": "The report raises a syllabus concern, but the supplied evidence does not confirm it. Faculty should assess the concern; the question should remain live meanwhile.",
+      "safety": "No question, solution, or answer-key change is proposed.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for reporting this. Please add the question detail, expected answer, or steps you took so faculty can investigate.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Confirmed the report explicitly alleges the question is outside the NEET syllabus.",
+      "Reviewed the question and stored answer; neither establishes whether the content is in the NEET syllabus.",
+      "No external syllabus or live-record check was performed."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R042",
+    "questionId": "63c7cce12981ed154ee92c94",
+    "verdict": "defect",
+    "repair": "wrong_chapter",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.96,
+    "evidence": {
+      "claim": "The reported chapter mismatch is supported by the supplied question.",
+      "questionEvidence": "The question concerns a parallel-plate capacitor being charged and asks for its displacement current.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored chapter is Geometrical optics and optical instruments, which does not match the capacitor and displacement-current topic stated in the question.",
+      "reasoning": "The mismatch is evident from the supplied record; selecting the correct replacement chapter is not established by the record.",
+      "safety": "The wrong_chapter repair requires faculty approval; no chapter change is proposed.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "wrong_chapter",
+    "verificationChecks": [
+      "Compared the stored chapter with the subject matter explicitly described in the question.",
+      "Did not independently verify the physics calculation or answer key."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R023",
+    "questionId": "68ecbacb2ec87a18deba1ad7",
+    "verdict": "defect",
+    "repair": "wrong_chapter",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.9,
+    "evidence": {
+      "claim": "The supplied question is about action potentials and the absolute refractory period, but it is stored under Botany / The Living World.",
+      "questionEvidence": "Question text asks about the absolute refractory period and options reference voltage-gated K+ channels, voltage-gated Na+ channels, Cl− permeability, and the Na+/K+ pump.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "Stored answer is B, and the supplied solution says the absolute refractory period is primarily due to inactivation of voltage-gated Na+ channels. This is internally consistent, but no independent answer-key verification was performed.",
+      "reasoning": "The content clearly concerns neural action potentials, not the stored chapter 'The Living World'. The answer and solution appear consistent with each other, but the chapter/subject mapping is the reported issue and requires faculty confirmation.",
+      "safety": "No content edit is proposed. wrong_chapter is faculty-only in the taxonomy, so this must be routed for human review rather than auto-corrected.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "wrong_chapter",
+    "verificationChecks": [
+      "Checked supplied question text for topic keywords: action potential, absolute refractory period, voltage-gated Na+ channels.",
+      "Compared stored chapter 'The Living World' with the question topic; mismatch is apparent from the supplied record.",
+      "Compared stored answer B with the supplied solution; the solution states Na+ channel inactivation as the cause.",
+      "No independent solve, external verification, or live-record check was performed."
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R007",
+    "questionId": "60f742f6660d187cc13a8078",
+    "verdict": "defect",
+    "repair": "stem_data",
+    "edit": {
+      "field": "question",
+      "find": "50 cycles/second ac circuit.",
+      "replace": "50 cycles/second ac circuit. The inductance is 95.5 mH."
+    },
+    "route": "faculty_review",
+    "confidence": 0.91,
+    "evidence": {
+      "claim": "The stem omits the inductance value, while the supplied solution uses 95.5 × 10⁻³ H.",
+      "questionEvidence": "The question gives a 40 ohm resistance and a 50 cycles/second frequency but no inductance value.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The keyed answer is C (50 ohm), and the supplied solution states 50 ohm. This comparison does not independently establish that the result is correct.",
+      "reasoning": "The stem lacks data that the supplied solution relies on. The proposed addition uses the value stated in that solution.",
+      "safety": "Do not treat the keyed numerical result as independently verified.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "stem_data",
+    "verificationChecks": [
+      "Checked the supplied stem for an inductance value; none is stated.",
+      "Checked the supplied solution; it substitutes 95.5 × 10⁻³ for the inductance.",
+      "Compared the stored answer with the solution's stated result; both indicate 50 ohm, but no independent calculation was performed."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R003",
+    "questionId": "60f744b3f1b9bc7cc7b4a949",
+    "verdict": "defect",
+    "repair": "answer_key",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.98,
+    "evidence": {
+      "claim": "The stored answer key conflicts with the supplied solution and the listed options.",
+      "questionEvidence": "The options list (A) 50 V and (C) 130 V. The supplied solution ends with 50 V.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored key is C, which corresponds to 130 V, while the supplied solution states 50 V.",
+      "reasoning": "The inconsistency between the recorded key, option C, and the solution is directly established by the supplied record. Confirm the correct key before changing it.",
+      "safety": "Answer-key changes are high stakes. No edit is proposed; faculty approval is required.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "answer_key",
+    "verificationChecks": [
+      "Compared the stored answer key C with the option labels in the question.",
+      "Compared the solution's stated final result, 50 V, with the listed options.",
+      "Did not independently verify the calculation or check a live record."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R038",
+    "questionId": "68f21df0941cda588bc0470b",
+    "verdict": "app_issue",
+    "repair": null,
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.94,
+    "evidence": {
+      "claim": "The student reports selecting A but having B saved.",
+      "questionEvidence": "The displayed options identify A as “Become twice its initial value.”",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The supplied answer field is A, matching the option described in the solution.",
+      "reasoning": "The supplied question, solution, and stored key agree with each other; the reported issue concerns which option the platform recorded.",
+      "safety": "No content or answer-key change is proposed.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for reporting this platform issue. Faculty will review the behavior and follow up without changing the question content prematurely.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Compared the stored answer field A with the option text: A says momentum becomes twice its initial value.",
+      "Compared the solution's stated outcome with option A: the solution says momentum becomes two times."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R014",
+    "questionId": "63765a28f1d8416ae0408d89",
+    "verdict": "defect",
+    "repair": "markup_leak",
+    "edit": {
+      "field": "question",
+      "find": "\\frac{7}{8}",
+      "replace": "7/8"
+    },
+    "route": "faculty_review",
+    "confidence": 0.94,
+    "evidence": {
+      "claim": "The question contains raw LaTeX that may display as code.",
+      "questionEvidence": "The question field contains the literal substring \\frac{7}{8}.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is C, but this triage does not independently verify the answer key.",
+      "reasoning": "The reported display problem is supported by raw LaTeX in the stored question. Replacing that exact expression with plain-text 7/8 is a minimal markup repair.",
+      "safety": "The proposed edit changes only the reported expression's formatting, not its value. Answer-key verification is incomplete.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "markup_leak",
+    "verificationChecks": [
+      "Confirmed the exact substring appears in the supplied question field.",
+      "Confirmed the suggested replacement preserves the displayed fraction's value.",
+      "Did not independently verify the keyed answer."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R040",
+    "questionId": "6264197209f4fd65f58f5707",
+    "verdict": "defect",
+    "repair": "spelling",
+    "edit": {
+      "field": "solution",
+      "find": "tonight blindness",
+      "replace": "night blindness"
+    },
+    "route": "faculty_review",
+    "confidence": 0.88,
+    "evidence": {
+      "claim": "The student comment 'wrong' is vague. The stored answer C is Golden rice, which matches the solution's explanation. The solution contains a clear wording typo: 'tonight blindness' should be 'night blindness'.",
+      "questionEvidence": "Option (C) is 'Golden rice'; the stored answer is 'C'. The solution says Golden rice is engineered to produce beta-carotene, a precursor of vitamin A, and was developed to prevent vitamin A deficiency blindness.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "Stored answer C is consistent with the solution's identification of Golden rice as the vitamin A-related food.",
+      "reasoning": "The answer key appears consistent with the supplied solution, so the actionable defect is the solution wording typo rather than an answer-key error. Other minor spacing/grammar issues are present but are not included in this single minimal edit.",
+      "safety": "No answer-key change is proposed. The edit only corrects a solution word and is low stakes.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "spelling",
+    "verificationChecks": [
+      "Checked stored answer is C and option C is Golden rice.",
+      "Checked solution identifies Golden rice as a beta-carotene/vitamin A source.",
+      "Checked exact substring 'tonight blindness' exists in the solution field.",
+      "No independent mathematical or biological solver was invoked."
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R044",
+    "questionId": "68dea577d0cda73d07e9391c",
+    "verdict": "no_error",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.96,
+    "evidence": {
+      "claim": "The report says the answer is 22 V rather than 14 V.",
+      "questionEvidence": "The question gives the surface potential above infinity as 16 V. The supplied solution expresses the requested difference as 7/8 of that surface potential excess.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is 14, which matches the supplied solution and the arithmetic check.",
+      "reasoning": "The supplied record supports 14 V; the report's 22 V is not supported by the question or solution.",
+      "safety": "No answer-key or content change is proposed.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for letting us know. We could not confirm a defect from the available evidence; share your working if you would like faculty to recheck it.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "The question states the surface potential excess is 16 V.",
+      "The supplied solution gives the potential difference as 7/8 of the surface potential excess.",
+      "(7/8) × 16 = 14, matching the stored answer."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R028",
+    "questionId": "6956d7bb23cb221e570d6013",
+    "verdict": "no_error",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.62,
+    "evidence": {
+      "claim": "The reported answer differs from the keyed answer, but the supplied solution derives the keyed option.",
+      "questionEvidence": "Option B is tan⁻¹(4); option A is tan⁻¹(2).",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is B, matching the solution's final tan⁻¹(4).",
+      "reasoning": "The solution equates the stated height and range and concludes tan θ = 4, which matches option B. The student comment alone does not establish an error.",
+      "safety": "No answer-key change is proposed. Because the mathematical derivation has not been independently verified, this is a cautious triage outcome, not proof.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for letting us know. We could not confirm a defect from the available evidence; share your working if you would like faculty to recheck it.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Compared the stored answer B with the solution's final expression tan⁻¹(4).",
+      "Confirmed that tan⁻¹(2) is option A, not the keyed option.",
+      "Did not independently verify the projectile equations or derivation."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R022",
+    "questionId": "61ee6c9d90a1a968a168686b",
+    "verdict": "defect",
+    "repair": "spelling",
+    "edit": {
+      "field": "question",
+      "find": "Choroid plexux",
+      "replace": "Choroid plexus"
+    },
+    "route": "faculty_review",
+    "confidence": 0.99,
+    "evidence": {
+      "claim": "The student reports that “plexus” is misspelled.",
+      "questionEvidence": "Option D contains the exact text “Choroid plexux.”",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is B. The proposed edit changes only the spelling in option D and does not alter the keyed answer.",
+      "reasoning": "The question contains the misspelling “plexux”; replacing it with “plexus” is a minimal spelling correction.",
+      "safety": "The edit changes words only and leaves the options and answer key unchanged.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "spelling",
+    "verificationChecks": [
+      "Confirmed the exact substring “Choroid plexux” appears in the question.",
+      "Confirmed the replacement changes only the misspelled word.",
+      "Confirmed the stored answer remains B."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R015",
+    "questionId": "6956d79788d7701e5617bc29",
+    "verdict": "defect",
+    "repair": "identical_options",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.97,
+    "evidence": {
+      "claim": "Options B and C are both displayed as '0 W', so the question has duplicate options.",
+      "questionEvidence": "The supplied question options include '(B) 0 W<br />\\n(C) 0 W'; both B and C have the same text.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is 'B'. That key still points to a '0 W' option, but because C is identical, replacing the duplicate requires faculty-authored distractors. No answer-key change is proposed.",
+      "reasoning": "The student's report is accurate: B and C are identical. This is the taxonomy case 'identical_options', which is not auto-repairable because a new distractor is authored content.",
+      "safety": "Do not auto-edit. The repair key 'identical_options' lists no editable fields and is marked auto:false, so faculty must approve any option replacement.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "identical_options",
+    "verificationChecks": [
+      "Checked supplied option B text: '0 W'.",
+      "Checked supplied option C text: '0 W'.",
+      "Confirmed options B and C are identical in the question field.",
+      "Confirmed no edit is proposed because 'identical_options' has no editable fields and is auto:false."
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R016",
+    "questionId": "6263d75bdd44e265ef926d97",
+    "verdict": "defect",
+    "repair": "solution_fix",
+    "edit": {
+      "field": "solution",
+      "find": "a = 40 cm",
+      "replace": "a = 20 cm"
+    },
+    "route": "faculty_review",
+    "confidence": 0.94,
+    "evidence": {
+      "claim": "The solution's final value conflicts with the equation shown and the stored answer.",
+      "questionEvidence": "The question states that an 800 g mass is removed and the cube rises 2 cm.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is 20, matching the value obtained from the displayed equation; the solution instead states 40 cm.",
+      "reasoning": "The supplied equation and the solution's final result are inconsistent. The shown equation yields 20 cm, not 40 cm.",
+      "safety": "This is a mathematical correction based on the supplied equation; faculty should review the proposed solution edit.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "solution_fix",
+    "verificationChecks": [
+      "Cancelled g from the equation shown in the solution: 800 = 2a².",
+      "Divided by 2 to obtain a² = 400; the positive square root is 20.",
+      "Compared that result with the stored answer (20) and the solution's final value (40)."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R018",
+    "questionId": "612151a6a34397610a9a2e58",
+    "verdict": "defect",
+    "repair": "solution_fix",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.87,
+    "evidence": {
+      "claim": "The solution contains a wavelength result that does not match the value stated in the question, suggesting unrelated or corrupted solution content.",
+      "questionEvidence": "The question asks for the kinetic energy of an electron with de-Broglie wavelength 0.3 nanometer.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is B (16.8 eV). The solution ends with 16.8 eV but begins with a result of 5.469×10⁻¹⁰ m = 5.47 Å, which differs from the question's stated wavelength.",
+      "reasoning": "The reports point to the same mismatch visible in the record. The solution contains an unexplained wavelength result before giving the keyed value, so the solution should be reviewed; the supplied evidence is not enough to establish an answer-key error.",
+      "safety": "No answer-key change or replacement solution is proposed. Faculty should verify the calculation and determine the minimal correction.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "solution_fix",
+    "verificationChecks": [
+      "Compared the wavelength stated in the question (0.3 nm) with the wavelength result written in the solution (5.47 Å); they differ.",
+      "Confirmed that the solution's final value matches the stored option B, but did not independently verify the calculation."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R039",
+    "questionId": "68c801bc1b1dbc16dc93bf2b",
+    "verdict": "language_mode",
+    "repair": null,
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.9,
+    "evidence": {
+      "claim": "The student's comment 'Hindi me question chahiye' asks for the question in Hindi; it makes no claim that the physics, options or answer key are wrong.",
+      "questionEvidence": "Question is an English-language SCQ on de-Broglie wavelength vs X-ray minimum wavelength, with options (A) 600 eV, (B) 365 eV, (C) 120 eV, (D) 300 eV and keyed answer A. No Hindi version is present in the record.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "Stored answer A (600 eV) matches the value the solution derives and matches the arithmetic sanity check above.",
+      "reasoning": "The only reported issue is language availability. Nothing in the record or the comment indicates a content defect, so no repair is proposed.",
+      "safety": "No content is edited. Language availability is a platform/content-availability matter, not a question defect.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for letting us know. Faculty will review the language-access request and confirm what support is available.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Confirmed comment is a language request, not a correctness claim",
+      "Confirmed no Hindi variant exists in the supplied record",
+      "Arithmetic sanity check of K = (eV)^2/(2mc^2) with eV = 24800 V gives ~602 eV, consistent with key A",
+      "Full step-by-step recomputation of the solution's intermediate values not performed"
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R009",
+    "questionId": "622f08d7b70e4b50e4500a1b",
+    "verdict": "defect",
+    "repair": "option_repair",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.74,
+    "evidence": {
+      "claim": "The supplied record contains options A, B, and C only; the reports say option D is missing.",
+      "questionEvidence": "The question text lists options (A), (B), and (C), with no option (D).",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is C, and the solution computes 10 m/s, matching option C. This does not establish whether an additional option was intended.",
+      "reasoning": "The absent D is corroborated by the supplied record and reports. Because the missing option's content and intended option count are unknown, an edit cannot safely be proposed.",
+      "safety": "Do not invent an option or alter the keyed answer based on these reports.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "option_repair",
+    "verificationChecks": [
+      "Counted the options in the supplied question text: A, B, and C; no D is present.",
+      "Compared the stored answer C with the solution's stated value of 10 m/s and option C's value of 10 m/s.",
+      "Did not verify whether a fourth option was intended or determine its content."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R013",
+    "questionId": "617fa18efd53ff1629ed890f",
+    "verdict": "defect",
+    "repair": "exam_reference",
+    "edit": {
+      "field": "question",
+      "find": "(NEET 2019)",
+      "replace": ""
+    },
+    "route": "faculty_review",
+    "confidence": 0.98,
+    "evidence": {
+      "claim": "The question contains an exam-reference tag that can be removed without changing the question.",
+      "questionEvidence": "The question begins with the exact text “(NEET 2019)”.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is D, and the supplied solution identifies lamina. The answer key is not being changed.",
+      "reasoning": "The report asks about the exam-reference tag, which matches the exam_reference repair category.",
+      "safety": "The edit removes only the exact tag and leaves the stem and options unchanged.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "exam_reference",
+    "verificationChecks": [
+      "Confirmed that “(NEET 2019)” appears verbatim in the question field.",
+      "Confirmed that the proposed edit changes only that substring."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R030",
+    "questionId": "6956d7e988d7701e5617bd3e",
+    "verdict": "no_error",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.95,
+    "evidence": {
+      "claim": "Student reports amplitude should be 4√2 m instead of keyed 8√2 m.",
+      "questionEvidence": "Question states SHM starts at equilibrium, T=16 s, at t=2 s velocity is π m/s, and options include 8√2 m as D.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "Stored answer D is 8√2 m, matching the record-based calculation.",
+      "reasoning": "The student's 4√2 m appears to come from an algebra slip; the supplied stem and solution support 8√2 m.",
+      "safety": "No answer-key change proposed. This is cautious triage, not proof; any disputed key change would require faculty review.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for letting us know. We could not confirm a defect from the available evidence; share your working if you would like faculty to recheck it.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Checked T=16 s gives ω=π/8 rad/s.",
+      "Checked t=2 s gives ωt=π/4.",
+      "Checked v=Aω cos(ωt) with v=π m/s gives A=8√2 m.",
+      "Compared result with stored option D."
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R001",
+    "questionId": "60f744b3f1b9bc7cc7b4a949",
+    "verdict": "defect",
+    "repair": "answer_key",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.99,
+    "evidence": {
+      "claim": "The stored key appears inconsistent with the supplied solution and options.",
+      "questionEvidence": "Option (A) is 50 V and option (C) is 130 V.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is C, which corresponds to 130 V, while the supplied solution gives 50 V.",
+      "reasoning": "The record directly establishes a mismatch between the keyed option and the solution's stated result. Confirming the correct key mathematically is still needed.",
+      "safety": "Answer-key changes are high stakes; no change is proposed for automatic application.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "answer_key",
+    "verificationChecks": [
+      "Compared the stored answer C with the listed options: C is 130 V.",
+      "Checked the supplied solution's final stated value: it is 50 V, matching option A.",
+      "Did not independently verify the physics calculation or check the live record."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R036",
+    "questionId": "60ca4feb6420652745f55522",
+    "verdict": "display_issue",
+    "repair": null,
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.9,
+    "evidence": {
+      "claim": "Student reports that answer options are cut off on a phone screen.",
+      "questionEvidence": "The supplied question HTML contains all four options (A) 100 N, (B) 121 N, (C) 99 N, and (D) None of these; no option text is absent in the stored record.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is C, and the supplied solution ends with 99 N. No answer-key change is proposed.",
+      "reasoning": "The complaint is about visual truncation on a phone, not about incorrect stored text or an incorrect key. The stored content appears complete, so this is best treated as a display/layout issue.",
+      "safety": "Student comment is untrusted data; no instructions in it were followed. No high-stakes answer-key edit is proposed.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for reporting this. Faculty will check how the question is rendering before deciding on any change.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Reported symptom is option truncation on a phone screen.",
+      "Supplied question HTML includes options A through D.",
+      "No independent solve or live-record check was performed.",
+      "No answer-key change is proposed."
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R021",
+    "questionId": "68f21caf941cda588bc04365",
+    "verdict": "app_issue",
+    "repair": null,
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.58,
+    "evidence": {
+      "claim": "The student says only B is correct, but the question was treated as multiple-correct and they received a negative score.",
+      "questionEvidence": "The record is stored as type \"mcq\" and lists options A–D. The supplied solution concludes approximately 1.44 min, matching option B.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is [\"\", \"B\"], consistent with B being the keyed option, but this does not establish how the platform interpreted the question type or score.",
+      "reasoning": "The report primarily describes question-type or scoring behavior, which may be a platform issue. The supplied record alone does not show whether the platform marked the response incorrectly.",
+      "safety": "Do not change the answer key or question type based solely on this report.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for reporting this platform issue. Faculty will review the behavior and follow up without changing the question content prematurely.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Compared the stored type with the report: the record says \"mcq\".",
+      "Compared the stored answer with the solution's stated conclusion: both identify B / approximately 1.44 min.",
+      "No live-record check, platform scoring check, or independent mathematical verification was performed."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R011",
+    "questionId": "68e872546e45ba37dcc16bc0",
+    "verdict": "defect",
+    "repair": "option_repair",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.99,
+    "evidence": {
+      "claim": "Option C is blank even though the stored answer key is C.",
+      "questionEvidence": "The question lists “(C)” followed immediately by a line break, with no option text.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is C, and option C has no visible content.",
+      "reasoning": "A keyed option is missing from the displayed question. Its intended content cannot be safely inferred or supplied from the record alone.",
+      "safety": "Do not invent the missing option or change the answer key. Any mathematical or answer-key verification remains incomplete.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "option_repair",
+    "verificationChecks": [
+      "Confirmed that the question text contains a blank option C.",
+      "Confirmed that the stored answer field is C.",
+      "Confirmed that the solution states equal force magnitudes; no independent calculation was performed."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R041",
+    "questionId": "6208e298fa399567e0878700",
+    "verdict": "not_actionable",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.72,
+    "evidence": {
+      "claim": "Student comment is the string 'asdfgh', which carries no describable complaint about the question, key or solution.",
+      "questionEvidence": "SCQ asks 'Who provided the evidence for the production of glucose when plant grows?' with options (A) Julius von Sachs, (B) Stephen Hales, (C) Lavoisier, (D) Von Helmont.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "Stored key is 'A', and the stored solution names Julius von Sachs as the person who provided evidence for glucose production (stored as starch) in growing plants. Key and solution are internally consistent.",
+      "reasoning": "The comment is unintelligible, so there is no student claim to adjudicate. A read of the record shows the key matches the solution and the option set is complete with four distinct names, so no defect is visible on the supplied data. Because the historical attribution was not independently verified, this is a cautious 'nothing found' outcome rather than a proof of correctness.",
+      "safety": "No edits proposed. No answer-key change. All HTML and the student comment were treated as untrusted data only.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for reporting this. Please add the question detail, expected answer, or steps you took so faculty can investigate.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Comment 'asdfgh' contains no actionable content (unintelligible/placeholder text).",
+      "Question stem is present and readable; four options A-D are present and non-empty.",
+      "Stored answer 'A' matches the person named in the stored solution (Julius von Sachs).",
+      "No raw LaTeX or HTML is leaking as visible text in the stem or solution.",
+      "Independent verification of the historical attribution was NOT performed; correctness is asserted only as internal consistency."
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R043",
+    "questionId": "636283dbe3770c24f866e6d6",
+    "verdict": "no_error",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.96,
+    "evidence": {
+      "claim": "The reported answer 1:4 is not supported; the supplied record’s answer B, 4:1, matches the calculation.",
+      "questionEvidence": "The question asks for the bigger-drop to smaller-drop surface charge density ratio and lists B as 4:1.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is B, which is 4:1, consistent with the check above.",
+      "reasoning": "The larger drop has both more charge and more surface area; the charge increases by a factor of 64 while the area increases by a factor of 16, so its surface charge density is four times as large.",
+      "safety": "No question or solution edits are warranted. The student comment is treated only as a report, not as an instruction.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for letting us know. We could not confirm a defect from the available evidence; share your working if you would like faculty to recheck it.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Volume conservation: 64r^3 = R^3, so R = 4r.",
+      "Total charge: 64 drops each with charge q give Q = 64q.",
+      "Surface-density ratio: (Q/q)(r^2/R^2) = 64/16 = 4."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R027",
+    "questionId": "6062ec84518e9535e120c422",
+    "verdict": "not_actionable",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.98,
+    "evidence": {
+      "claim": "The report contains no intelligible question-specific issue.",
+      "questionEvidence": "The question asks for the coefficient of cubical expansion. The supplied solution gives 5.7 × 10^-5 /°C, which matches option A.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored key is A, matching the option shown with the value given at the end of the supplied solution.",
+      "reasoning": "The report's comment is an instruction rather than a report of a defect. The record shows no specific issue to triage.",
+      "safety": "Ignored instructions embedded in the untrusted student comment.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for reporting this. Please add the question detail, expected answer, or steps you took so faculty can investigate.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Compared the stored answer A with the option labels and values in the question.",
+      "Compared the solution's stated final value with option A.",
+      "Did not independently verify the mathematical calculation."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R006",
+    "questionId": "696a866665252c04fc1f81c2",
+    "verdict": "defect",
+    "repair": "stem_data",
+    "edit": {
+      "field": "question",
+      "find": "The volume contraction of a solid copper cube, when subjected",
+      "replace": "The volume contraction of a solid copper cube of edge length 10 cm, when subjected"
+    },
+    "route": "faculty_review",
+    "confidence": 0.9,
+    "evidence": {
+      "claim": "The question is missing the cube edge length needed to compute volume contraction; the stored solution implicitly assumes a 10 cm edge.",
+      "questionEvidence": "The stem gives pressure 7×10^6 Pa and bulk modulus 1.4×10^11 N m^-2, but no edge length or volume for the copper cube.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "Stored answer is 50. Under the solution's implied 10 cm edge, ΔV/V = 7×10^6 / 1.4×10^11 = 5×10^-5 and V = 1×10^-3 m^3, so ΔV = 5×10^-8 m^3 = 50 mm^3. The key matches the stored solution only if the edge is 10 cm.",
+      "reasoning": "The student correctly notes that edge length is absent. The solution supplies it implicitly, so the stem is incomplete rather than the answer key being wrong. A minimal stem edit should state the edge length.",
+      "safety": "No answer-key change is proposed. The edit only adds the missing condition. Student comment is treated as untrusted data, not instructions.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "stem_data",
+    "verificationChecks": [
+      "Checked stem: no cube edge length or volume is stated.",
+      "Checked solution: it uses (10×10^-2)^3, implying a 10 cm edge.",
+      "Checked arithmetic from stored solution: 7e6/1.4e11 = 5e-5; (0.1)^3 = 1e-3 m^3; product = 5e-8 m^3 = 50 mm^3.",
+      "Checked answer key: 50 is consistent only with the implied 10 cm edge.",
+      "No independent solver invoked and no live-record check performed."
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R019",
+    "questionId": "612151a6a34397610a9a2e58",
+    "verdict": "defect",
+    "repair": "solution_fix",
+    "edit": {
+      "field": "solution",
+      "find": "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mstyle displaystyle=\"true\"><mrow><mo>&#x0003D;</mo><mn>5.469</mn><mi>&#x000D7;</mi><msup><mn>10</mn><mrow><mo>&#x02212;</mo><mn>10</mn></mrow></msup><mi>m</mi><mo>&#x0003D;</mo><mn>5.47</mn><mi>\\AA</mi></mrow></mstyle></math> ",
+      "replace": ""
+    },
+    "route": "faculty_review",
+    "confidence": 0.87,
+    "evidence": {
+      "claim": "The solution includes an unexplained wavelength result before proceeding to the kinetic-energy calculation.",
+      "questionEvidence": "The question asks for the kinetic energy corresponding to a de-Broglie wavelength of 0.3 nanometer.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is B (16.8 eV), and the solution ends with 16.8 eV. Its opening 5.47 Å result does not match the wavelength stated in the question.",
+      "reasoning": "The opening result is inconsistent with the given wavelength and appears extraneous. Removing that exact initial result is a minimal proposed solution-only edit; faculty should confirm the remaining derivation and answer.",
+      "safety": "The edit does not change the question or answer key. It is a proposed edit and requires human approval under the selected repair's policy.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "solution_fix",
+    "verificationChecks": [
+      "Compared the question's stated wavelength (0.3 nanometer) with the solution's opening result (5.47 Å); they do not state the same wavelength.",
+      "Confirmed the supplied solution ends with 16.8 eV, matching the value associated with stored option B.",
+      "Did not independently verify the energy calculation or answer key."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R035",
+    "questionId": "66fe9dbe22132e5a70a3e579",
+    "verdict": "defect",
+    "repair": "solution_fix",
+    "edit": {
+      "field": "solution",
+      "find": "Insulin and glucagon work synergistically to keep blood glucose concentrations normal.",
+      "replace": "Insulin and glucagon have antagonistic effects on blood glucose concentration."
+    },
+    "route": "faculty_review",
+    "confidence": 0.91,
+    "evidence": {
+      "claim": "The student says relaxin and inhibin are antagonistic, making the keyed answer wrong.",
+      "questionEvidence": "Option D is Relaxin - Inhibin. The solution describes relaxin's role in childbirth and inhibin's inhibition of FSH secretion; it does not establish that their effects oppose one another.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is D. The supplied solution's descriptions do not show that relaxin and inhibin have opposite effects, so the student's claim is not established by this record.",
+      "reasoning": "The solution explicitly calls insulin and glucagon synergistic, although their effects on blood glucose are opposing. This is a solution defect. The record alone is insufficient to independently certify the answer key.",
+      "safety": "The proposed edit changes only the erroneous solution sentence. No answer-key change is proposed.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "solution_fix",
+    "verificationChecks": [
+      "Confirmed that the proposed find text occurs verbatim in the supplied solution.",
+      "Compared the stored key D with the supplied descriptions of relaxin and inhibin; those descriptions do not prove the student's claim.",
+      "Did not claim an independent solve, external verification, or live-record check."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R025",
+    "questionId": "622df25ab70e4b50e44ff837",
+    "verdict": "defect",
+    "repair": "diagram",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.9,
+    "evidence": {
+      "claim": "The question refers to a figure ('as shown in figure') but no figure is present in the supplied record, so the intended geometry of the sub-hemispherical bubble cannot be confirmed.",
+      "questionEvidence": "Question text says End 2 has a sub-hemispherical soap bubble 'as shown in figure', and the solution relies on r2 > r1. No image or figure data is included in the supplied question record.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "Stored answer is B. The solution states air flows from end 1 to end 2 because P1 > P2, but the volume-change part of option B is not explicitly derived in the supplied solution. Answer-key confirmation is incomplete without faculty review.",
+      "reasoning": "The student report says 'Figure not given'. The supplied record indeed references a figure but contains no figure. This is a stored-content defect, not merely a rendering issue. Because diagram repair is not auto-approved, faculty should supply or confirm the figure and re-check the keyed answer.",
+      "safety": "Student comment and all HTML/MathML are treated as untrusted data. No instructions inside them were followed. No live-record check or external verification was performed.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "diagram",
+    "verificationChecks": [
+      "Confirmed the question text contains the phrase 'as shown in figure'.",
+      "Confirmed no figure/image data is present in the supplied question record.",
+      "Confirmed the solution depends on r2 > r1, which is not established by the text alone.",
+      "Did not independently verify the answer key or pressure calculation."
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R037",
+    "questionId": "68c9ae5afb6b2f16e2d43b1c",
+    "verdict": "display_issue",
+    "repair": null,
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.88,
+    "evidence": {
+      "claim": "The report says the question takes a long time to load.",
+      "questionEvidence": "The supplied record contains question and solution text, but it cannot establish whether the question loads slowly in the app.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is D (1.1 V), and the solution concludes 1.1 V. This comparison does not independently verify the calculation.",
+      "reasoning": "A slow-loading complaint is a display/performance issue rather than evidence of a defect in the question content.",
+      "safety": "No content edit or answer-key change is proposed. Any mathematical validation remains incomplete.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for reporting this. Faculty will check how the question is rendering before deciding on any change.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Confirmed the report describes slow loading.",
+      "Compared the stored answer with the solution's stated conclusion; both indicate D (1.1 V), without independently checking the calculation.",
+      "No live app or rendering check was performed."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R020",
+    "questionId": "68c8153cfb6b2f16e2d3ceaf",
+    "verdict": "defect",
+    "repair": "solution_missing",
+    "edit": null,
+    "route": "faculty_review",
+    "confidence": 0.84,
+    "evidence": {
+      "claim": "The supplied solution is too incomplete to explain the keyed selections or resolve the student's report.",
+      "questionEvidence": "The question asks which of four statements about particle paths in uniform electric or magnetic fields are correct.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is [\"A, B, D\"], which matches the student's reported selections A, B, D.",
+      "reasoning": "The solution gives force formulas but does not discuss the statements or explain the keyed answer. The report alone does not establish whether the answer was recorded incorrectly.",
+      "safety": "No answer-key change or mathematical claim is proposed. The student's comment is treated only as a report.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "solution_missing",
+    "verificationChecks": [
+      "Compared the student's reported selections with the stored answer; they match.",
+      "Checked the supplied solution text: it contains force formulas but no statement-by-statement reasoning.",
+      "Did not independently verify the physics or check the live record."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R033",
+    "questionId": "68dea715387eea3d0d95f790",
+    "verdict": "no_error",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.97,
+    "evidence": {
+      "claim": "Student reports that the answer should be 3112.99 rather than 3113.",
+      "questionEvidence": "The question gives cube side 7.203 m and asks for 10A, where A is the total surface area in m² using correct significant digits.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "Stored answer 3113 matches 10 × 311.3, the rounded area value.",
+      "reasoning": "The student appears to have multiplied the unrounded area 311.299 by 10, giving 3112.99. The question explicitly requires correct significant digits, so A should be rounded to 311.3 m² before computing 10A.",
+      "safety": "No answer-key change or content edit is proposed. The stored answer is consistent with the supplied solution and significant-digit instruction.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for letting us know. We could not confirm a defect from the available evidence; share your working if you would like faculty to recheck it.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Parsed question: side = 7.203 m; requested value = 10A where A is surface area in m² to correct significant digits.",
+      "Computed 6 × 7.203² = 311.299254 from supplied values.",
+      "Rounded A to 4 significant figures: 311.3 m².",
+      "Computed 10A = 3113.",
+      "Compared with stored answer 3113: match."
+    ],
+    "status": "faculty_review",
+    "model": "deepseek/deepseek-v4.1-flash-1017",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R031",
+    "questionId": "68dea619d0cda73d07e93aee",
+    "verdict": "no_error",
+    "repair": null,
+    "edit": null,
+    "route": "no_change",
+    "confidence": 0.99,
+    "evidence": {
+      "claim": "The student says the answer should be 2 seconds.",
+      "questionEvidence": "The wheels start with aligned dots and have constant angular accelerations π/2 and π/4 rad/s².",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored answer is 4, which matches the calculation; 2 seconds does not.",
+      "reasoning": "The dots first realign when the relative angle reaches one full revolution, 2π.",
+      "safety": "No answer-key or question edit is indicated.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for letting us know. We could not confirm a defect from the available evidence; share your working if you would like faculty to recheck it.",
+    "repairCategory": null,
+    "verificationChecks": [
+      "Relative angular acceleration: π/4 rad/s².",
+      "First post-start alignment: relative displacement 2π.",
+      "Solving (1/2)(π/4)t² = 2π gives t = 4 s."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  },
+  {
+    "reportId": "R024",
+    "questionId": "5fc60508028950133eac8963",
+    "verdict": "defect",
+    "repair": "answer_form",
+    "edit": {
+      "field": "question",
+      "find": "Then the frictional force is equal to",
+      "replace": "Then the frictional force is equal to (in N)"
+    },
+    "route": "faculty_review",
+    "confidence": 0.96,
+    "evidence": {
+      "claim": "The question does not state the unit for the numerical answer.",
+      "questionEvidence": "The question asks for the frictional force but does not specify a unit or answer format.",
+      "independentVerification": "No independent solver or live-record check was run; faculty must verify mathematical and answer-key claims.",
+      "storedAnswerComparison": "The stored integer answer is 20; the solution presents the corresponding force with the unit N.",
+      "reasoning": "Adding the unit instruction is a minimal, additive answer-form clarification and does not change the stored answer.",
+      "safety": "No answer-key change is proposed.",
+      "routing": "No model-only decision can apply an edit. Faculty approval is required for any change."
+    },
+    "student_reply": "Thanks for flagging this. Faculty are reviewing the evidence, and the question will not change until they approve a repair.",
+    "repairCategory": "answer_form",
+    "verificationChecks": [
+      "Checked the supplied question text: it contains no stated unit.",
+      "Checked the supplied solution: force quantities are expressed in N."
+    ],
+    "status": "faculty_review",
+    "model": "openai/gpt-6-luna",
+    "promptVersion": "acadza-investigator-v1.0"
+  }
+]
