@@ -275,7 +275,7 @@ The observed routing and status inconsistencies are documented as limitations ra
 Clone the repository:
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone https://github.com/harshitajain08/acadza-question-integrity-platform.git
 cd acadza-question-integrity-platform
 ```
 
