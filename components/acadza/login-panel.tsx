@@ -8,6 +8,7 @@ import type { Role } from "@/lib/acadza/types"
 
 type Props = { onLogin: (role: Role, token?: string, id?: string) => void }
 type Mode = "signin" | "signup"
+type WorkspaceRole = "student" | "faculty"
 
 async function ensureStudentRole(token: string) {
   const response = await fetch("/api/auth/ensure-student-role", {
@@ -21,6 +22,7 @@ async function ensureStudentRole(token: string) {
 
 export function LoginPanel({ onLogin }: Props) {
   const [mode, setMode] = useState<Mode>("signin")
+  const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceRole>("student")
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -43,6 +45,12 @@ export function LoginPanel({ onLogin }: Props) {
       const { data, error: authError } = await client.auth.signInWithPassword({ email: email.trim(), password })
       if (authError || !data.user || !data.session) throw new Error("Unable to sign in. Check your credentials and try again.")
       let role = data.user.app_metadata?.role as Role | undefined
+      if (selectedWorkspace === "faculty") {
+        if (role !== "faculty") throw new Error("This account is not authorised for the faculty workspace. Please use a faculty account or contact your Acadza administrator.")
+        onLogin("faculty", data.session.access_token, data.user.id)
+        return
+      }
+      if (role === "faculty") throw new Error("This is a faculty account. Select Faculty workspace above to continue.")
       if (!role) {
         role = await ensureStudentRole(data.session.access_token)
         const refreshed = await client.auth.refreshSession()
@@ -50,8 +58,8 @@ export function LoginPanel({ onLogin }: Props) {
         onLogin(role, refreshed.data.session.access_token, data.user.id)
         return
       }
-      if (role !== "student" && role !== "faculty") throw new Error("Your account does not have an Acadza access role. Ask an administrator to assign one.")
-      onLogin(role, data.session.access_token, data.user.id)
+      if (role !== "student") throw new Error("Your account does not have an Acadza student access role. Ask an administrator for help.")
+      onLogin("student", data.session.access_token, data.user.id)
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Unable to sign in. Please try again.")
     } finally { setLoading(false) }
@@ -78,7 +86,7 @@ export function LoginPanel({ onLogin }: Props) {
         onLogin(role, refreshed.data.session.access_token, data.user.id)
         return
       }
-      setNotice("Account created. Check your email for the confirmation link. After confirming, sign in here to enter your student workspace.")
+      setNotice("Account created. Check your email for the confirmation link. After confirming, select Student and sign in.")
       setMode("signin"); setPassword(""); setConfirmPassword("")
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Unable to create your account. Please try again.")
@@ -104,7 +112,7 @@ export function LoginPanel({ onLogin }: Props) {
           <div className="login-mobile-brand"><span className="brand-mark">a</span><span>acadza</span></div>
           <div className="login-heading"><span className="login-icon"><Sparkles size={18} /></span><span>WELCOME TO ACADZA</span></div>
           <h2 id="signin-title">{mode === "signin" ? "Sign in to continue" : "Create your account"}</h2>
-          <p className="login-description">{mode === "signin" ? "Choose your workspace and get back to learning or reviewing." : "Create a student account to report and track question issues."}</p>
+          <p className="login-description">{mode === "signin" ? "Select Student or Faculty, then sign in with your authorised account." : "Create a student account to report and track question issues."}</p>
           {error && <p className="form-error" role="alert">{error}</p>}
           {notice && <p className="form-success" role="status">{notice}</p>}
           {demoEnabled ? (
@@ -119,6 +127,16 @@ export function LoginPanel({ onLogin }: Props) {
                 <button type="button" className={mode === "signin" ? "auth-mode-active" : ""} onClick={() => switchMode("signin")}>Sign in</button>
                 <button type="button" className={mode === "signup" ? "auth-mode-active" : ""} onClick={() => switchMode("signup")}>Sign up</button>
               </div>
+              {mode === "signin" && (
+                <div className="workspace-choice" role="group" aria-label="Choose your workspace">
+                  <button type="button" className={selectedWorkspace === "student" ? "workspace-choice-active" : ""} onClick={() => { setSelectedWorkspace("student"); setError("") }}>
+                    <GraduationCap size={17} /><span><strong>Student</strong><small>Learning portal</small></span>
+                  </button>
+                  <button type="button" className={selectedWorkspace === "faculty" ? "workspace-choice-active" : ""} onClick={() => { setSelectedWorkspace("faculty"); setError("") }}>
+                    <ShieldCheck size={17} /><span><strong>Faculty</strong><small>Review dashboard</small></span>
+                  </button>
+                </div>
+              )}
               <form className="signin-form" onSubmit={mode === "signin" ? signIn : signUp}>
                 {mode === "signup" && <><label htmlFor="full-name">Full name</label><input id="full-name" type="text" autoComplete="name" required minLength={2} maxLength={80} value={name} onChange={(event) => setName(event.target.value)} placeholder="Your full name" /></>}
                 <label htmlFor="email">Email address</label><input id="email" type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" />
