@@ -5,7 +5,7 @@ import path from "node:path"
 import { buildInvestigationPrompt, PROMPT_VERSION, requestOpenRouter, validateAndConstrain } from "../lib/acadza/engine.mjs"
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
-const dataRoot = path.join(root, "acadza-report-fix", "data")
+const dataRoot = path.join(root, "acadza-question-integrity-platform", "data")
 const [rawQuestions, rawReports, taxonomy] = await Promise.all([
   readFile(path.join(dataRoot, "questions.json"), "utf8").then(JSON.parse),
   readFile(path.join(dataRoot, "reports.json"), "utf8").then(JSON.parse),
