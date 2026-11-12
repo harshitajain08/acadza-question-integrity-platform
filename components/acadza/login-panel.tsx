@@ -10,13 +10,13 @@ type Props = { onLogin: (role: Role, token?: string, id?: string) => void }
 type Mode = "signin" | "signup"
 type WorkspaceRole = "student" | "faculty"
 
-async function ensureStudentRole(token: string) {
-  const response = await fetch("/api/auth/ensure-student-role", {
+async function ensureWorkspaceRole(token: string) {
+  const response = await fetch("/api/auth/ensure-role", {
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
   })
   const result = await response.json().catch(() => ({}))
-  if (!response.ok) throw new Error(result.error ?? "Could not prepare your student account.")
+  if (!response.ok) throw new Error(result.error ?? "Could not prepare your Acadza account.")
   return result.role as Role
 }
 
@@ -47,15 +47,19 @@ export function LoginPanel({ onLogin }: Props) {
       let role = data.user.app_metadata?.role as Role | undefined
       if (selectedWorkspace === "faculty") {
         if (role !== "faculty") {
-          if (data.user.user_metadata?.requested_role === "faculty") throw new Error("Your faculty access request is pending administrator approval. You can sign in to the faculty workspace after your role has been approved.")
-          throw new Error("This account is not authorised for the faculty workspace. Ask your Acadza administrator to grant faculty access.")
+          role = await ensureWorkspaceRole(data.session.access_token)
+          if (role !== "faculty") throw new Error("This account is registered for the student workspace. Create a separate faculty account to use the faculty workspace.")
+          const refreshed = await client.auth.refreshSession()
+          if (refreshed.error || !refreshed.data.session) throw new Error("Your faculty access was enabled, but your session could not be refreshed. Please sign in again.")
+          onLogin("faculty", refreshed.data.session.access_token, data.user.id)
+          return
         }
         onLogin("faculty", data.session.access_token, data.user.id)
         return
       }
       if (role === "faculty") throw new Error("This is a faculty account. Select Faculty workspace above to continue.")
       if (!role) {
-        role = await ensureStudentRole(data.session.access_token)
+        role = await ensureWorkspaceRole(data.session.access_token)
         const refreshed = await client.auth.refreshSession()
         if (refreshed.error || !refreshed.data.session) throw new Error("Your account was created, but your session could not be refreshed. Please sign in again.")
         onLogin(role, refreshed.data.session.access_token, data.user.id)
@@ -83,20 +87,15 @@ export function LoginPanel({ onLogin }: Props) {
       })
       if (authError) throw authError
       if (data.session && data.user) {
-        if (selectedWorkspace === "faculty") {
-          await client.auth.signOut()
-          setNotice("Your faculty access request has been submitted. An Acadza administrator must approve your faculty role before you can enter the review console.")
-          setMode("signin"); setPassword(""); setConfirmPassword("")
-          return
-        }
-        const role = await ensureStudentRole(data.session.access_token)
+        const role = await ensureWorkspaceRole(data.session.access_token)
+        if (role !== selectedWorkspace) throw new Error("Your account is registered for a different Acadza workspace.")
         const refreshed = await client.auth.refreshSession()
         if (refreshed.error || !refreshed.data.session) throw new Error("Your account was created, but your session could not be refreshed. Please sign in again.")
         onLogin(role, refreshed.data.session.access_token, data.user.id)
         return
       }
       setNotice(selectedWorkspace === "faculty"
-        ? "Faculty access request submitted. Check your email to confirm your account. An Acadza administrator must approve your faculty role before you can enter the review console."
+        ? "Account created. Check your email for the confirmation link. After confirming, select Faculty and sign in. Faculty access is available without administrator approval."
         : "Account created. Check your email for the confirmation link. After confirming, select Student and sign in.")
       setMode("signin"); setPassword(""); setConfirmPassword("")
     } catch (caught) {
@@ -123,7 +122,7 @@ export function LoginPanel({ onLogin }: Props) {
           <div className="login-mobile-brand"><span className="brand-mark">a</span><span>acadza</span></div>
           <div className="login-heading"><span className="login-icon"><Sparkles size={18} /></span><span>WELCOME TO ACADZA</span></div>
           <h2 id="signin-title">{mode === "signin" ? "Sign in to continue" : "Create your account"}</h2>
-          <p className="login-description">{mode === "signin" ? "Select your workspace, then sign in with your authorised account." : "Choose a student account or request faculty access."}</p>
+          <p className="login-description">{mode === "signin" ? "Select your workspace, then sign in with your authorised account." : "Choose a student or faculty account."}</p>
           {error && <p className="form-error" role="alert">{error}</p>}
           {notice && <p className="form-success" role="status">{notice}</p>}
           {demoEnabled ? (
@@ -143,7 +142,7 @@ export function LoginPanel({ onLogin }: Props) {
                     <GraduationCap size={17} /><span><strong>Student</strong><small>{mode === "signin" ? "Learning portal" : "Create student account"}</small></span>
                   </button>
                   <button type="button" className={selectedWorkspace === "faculty" ? "workspace-choice-active" : ""} onClick={() => { setSelectedWorkspace("faculty"); setError("") }}>
-                    <ShieldCheck size={17} /><span><strong>Faculty</strong><small>{mode === "signin" ? "Review dashboard" : "Request faculty access"}</small></span>
+                    <ShieldCheck size={17} /><span><strong>Faculty</strong><small>{mode === "signin" ? "Review dashboard" : "Faculty workspace"}</small></span>
                   </button>
               </div>
               <form className="signin-form" onSubmit={mode === "signin" ? signIn : signUp}>
@@ -155,7 +154,7 @@ export function LoginPanel({ onLogin }: Props) {
                 {mode === "signin" ? <p className="auth-helper">New to Acadza? <button type="button" onClick={() => switchMode("signup")}>Create an account / request access</button></p> : <p className="auth-helper">Already have an account? <button type="button" onClick={() => switchMode("signin")}>Sign in</button></p>}
                 <p className="secure-note"><LockKeyhole size={13} /> Secured with Acadza authentication</p>
               </form>
-              {mode === "signup" && <p className="signup-policy">{selectedWorkspace === "faculty" ? "Faculty sign-up submits an access request only. An administrator must approve the faculty role before the review console is available." : "Student registration is open. Faculty access requires administrator approval."}</p>}
+              {mode === "signup" && <p className="signup-policy">{selectedWorkspace === "faculty" ? "Faculty accounts can register and use the review console without manual approval." : "Student and faculty registration are open."}</p>}
             </>
           )}
           <div className="login-footer">By continuing, you agree to use the platform responsibly and report issues in good faith.</div>
