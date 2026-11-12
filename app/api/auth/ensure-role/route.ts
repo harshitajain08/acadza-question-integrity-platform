@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js"
 type WorkspaceRole = "student" | "faculty"
 
 export async function POST(request: Request) {
-  const token = request.headers.get("authorization")?.replace(/^Bearer\\s+/i, "")
+  const token = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "")
   const url = process.env.SUPABASE_URL
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   if (!token || !url || !serviceKey) {
