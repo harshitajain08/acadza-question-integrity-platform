@@ -2,7 +2,6 @@
 
 **Scope:** the supplied assignment dataset (`questions.json`, `reports.json`, `taxonomy.json`).
 **Result:** 43 question records, 44 reports, and 4 question IDs with no associated report.
-**Important:** this is a content audit of the supplied snapshot, not a claim about the live production question bank.
 
 ## Method
 
