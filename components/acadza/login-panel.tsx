@@ -45,7 +45,10 @@ export function LoginPanel({ onLogin }: Props) {
       let role = data.user.app_metadata?.role as Role | undefined
       if (!role) {
         role = await ensureStudentRole(data.session.access_token)
-        await client.auth.refreshSession()
+        const refreshed = await client.auth.refreshSession()
+        if (refreshed.error || !refreshed.data.session) throw new Error("Your account was created, but your session could not be refreshed. Please sign in again.")
+        onLogin(role, refreshed.data.session.access_token, data.user.id)
+        return
       }
       if (role !== "student" && role !== "faculty") throw new Error("Your account does not have an Acadza access role. Ask an administrator to assign one.")
       onLogin(role, data.session.access_token, data.user.id)
@@ -70,8 +73,9 @@ export function LoginPanel({ onLogin }: Props) {
       if (authError) throw authError
       if (data.session && data.user) {
         const role = await ensureStudentRole(data.session.access_token)
-        await client.auth.refreshSession()
-        onLogin(role, data.session.access_token, data.user.id)
+        const refreshed = await client.auth.refreshSession()
+        if (refreshed.error || !refreshed.data.session) throw new Error("Your account was created, but your session could not be refreshed. Please sign in again.")
+        onLogin(role, refreshed.data.session.access_token, data.user.id)
         return
       }
       setNotice("Account created. Check your email for the confirmation link. After confirming, sign in here to enter your student workspace.")
