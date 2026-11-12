@@ -33,11 +33,23 @@ export function AcadzaWorkspace({ questions, reports: initialReports, taxonomy, 
   useEffect(() => {
     const client = getBrowserSupabase()
     if (!client) return
-    const { data: { subscription } } = client.auth.onAuthStateChange((_event, authSession) => {
-      const role = authSession?.user.app_metadata?.role
-      if (authSession && (role === "student" || role === "faculty")) {
-        setSession({ role, token: authSession.access_token, id: authSession.user.id })
-      } else if (!authSession) setSession(null)
+    const { data: { subscription } } = client.auth.onAuthStateChange((event, authSession) => {
+      // LoginPanel validates the user's chosen workspace before calling onLogin.
+      // Ignore SIGNED_IN here; otherwise a student's session can open the student
+      // portal before a faculty-workspace attempt has been rejected.
+      if (event === "SIGNED_IN") return
+      if (event === "SIGNED_OUT" || !authSession) {
+        setSession(null)
+        return
+      }
+      if (event === "INITIAL_SESSION" || event === "TOKEN_REFRESHED" || event === "USER_UPDATED") {
+        const role = authSession.user.app_metadata?.role
+        if (role === "student" || role === "faculty") {
+          setSession({ role, token: authSession.access_token, id: authSession.user.id })
+        } else {
+          setSession(null)
+        }
+      }
     })
     return () => subscription.unsubscribe()
   }, [])
