@@ -46,7 +46,10 @@ export function LoginPanel({ onLogin }: Props) {
       if (authError || !data.user || !data.session) throw new Error("Unable to sign in. Check your credentials and try again.")
       let role = data.user.app_metadata?.role as Role | undefined
       if (selectedWorkspace === "faculty") {
-        if (role !== "faculty") throw new Error("This account is not authorised for the faculty workspace. Please use a faculty account or contact your Acadza administrator.")
+        if (role !== "faculty") {
+          if (data.user.user_metadata?.requested_role === "faculty") throw new Error("Your faculty access request is pending administrator approval. You can sign in to the faculty workspace after your role has been approved.")
+          throw new Error("This account is not authorised for the faculty workspace. Ask your Acadza administrator to grant faculty access.")
+        }
         onLogin("faculty", data.session.access_token, data.user.id)
         return
       }
@@ -76,17 +79,25 @@ export function LoginPanel({ onLogin }: Props) {
       const { data, error: authError } = await client.auth.signUp({
         email: email.trim(),
         password,
-        options: { data: { full_name: name.trim() } },
+        options: { data: { full_name: name.trim(), requested_role: selectedWorkspace } },
       })
       if (authError) throw authError
       if (data.session && data.user) {
+        if (selectedWorkspace === "faculty") {
+          await client.auth.signOut()
+          setNotice("Your faculty access request has been submitted. An Acadza administrator must approve your faculty role before you can enter the review console.")
+          setMode("signin"); setPassword(""); setConfirmPassword("")
+          return
+        }
         const role = await ensureStudentRole(data.session.access_token)
         const refreshed = await client.auth.refreshSession()
         if (refreshed.error || !refreshed.data.session) throw new Error("Your account was created, but your session could not be refreshed. Please sign in again.")
         onLogin(role, refreshed.data.session.access_token, data.user.id)
         return
       }
-      setNotice("Account created. Check your email for the confirmation link. After confirming, select Student and sign in.")
+      setNotice(selectedWorkspace === "faculty"
+        ? "Faculty access request submitted. Check your email to confirm your account. An Acadza administrator must approve your faculty role before you can enter the review console."
+        : "Account created. Check your email for the confirmation link. After confirming, select Student and sign in.")
       setMode("signin"); setPassword(""); setConfirmPassword("")
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Unable to create your account. Please try again.")
@@ -112,7 +123,7 @@ export function LoginPanel({ onLogin }: Props) {
           <div className="login-mobile-brand"><span className="brand-mark">a</span><span>acadza</span></div>
           <div className="login-heading"><span className="login-icon"><Sparkles size={18} /></span><span>WELCOME TO ACADZA</span></div>
           <h2 id="signin-title">{mode === "signin" ? "Sign in to continue" : "Create your account"}</h2>
-          <p className="login-description">{mode === "signin" ? "Select Student or Faculty, then sign in with your authorised account." : "Create a student account to report and track question issues."}</p>
+          <p className="login-description">{mode === "signin" ? "Select your workspace, then sign in with your authorised account." : "Choose a student account or request faculty access."}</p>
           {error && <p className="form-error" role="alert">{error}</p>}
           {notice && <p className="form-success" role="status">{notice}</p>}
           {demoEnabled ? (
@@ -127,26 +138,24 @@ export function LoginPanel({ onLogin }: Props) {
                 <button type="button" className={mode === "signin" ? "auth-mode-active" : ""} onClick={() => switchMode("signin")}>Sign in</button>
                 <button type="button" className={mode === "signup" ? "auth-mode-active" : ""} onClick={() => switchMode("signup")}>Sign up</button>
               </div>
-              {mode === "signin" && (
-                <div className="workspace-choice" role="group" aria-label="Choose your workspace">
+              <div className="workspace-choice" role="group" aria-label={mode === "signin" ? "Choose your workspace" : "Choose account type"}>
                   <button type="button" className={selectedWorkspace === "student" ? "workspace-choice-active" : ""} onClick={() => { setSelectedWorkspace("student"); setError("") }}>
-                    <GraduationCap size={17} /><span><strong>Student</strong><small>Learning portal</small></span>
+                    <GraduationCap size={17} /><span><strong>Student</strong><small>{mode === "signin" ? "Learning portal" : "Create student account"}</small></span>
                   </button>
                   <button type="button" className={selectedWorkspace === "faculty" ? "workspace-choice-active" : ""} onClick={() => { setSelectedWorkspace("faculty"); setError("") }}>
-                    <ShieldCheck size={17} /><span><strong>Faculty</strong><small>Review dashboard</small></span>
+                    <ShieldCheck size={17} /><span><strong>Faculty</strong><small>{mode === "signin" ? "Review dashboard" : "Request faculty access"}</small></span>
                   </button>
-                </div>
-              )}
+              </div>
               <form className="signin-form" onSubmit={mode === "signin" ? signIn : signUp}>
                 {mode === "signup" && <><label htmlFor="full-name">Full name</label><input id="full-name" type="text" autoComplete="name" required minLength={2} maxLength={80} value={name} onChange={(event) => setName(event.target.value)} placeholder="Your full name" /></>}
                 <label htmlFor="email">Email address</label><input id="email" type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" />
                 <label htmlFor="password">Password</label><input id="password" type="password" autoComplete={mode === "signin" ? "current-password" : "new-password"} required minLength={mode === "signup" ? 8 : undefined} value={password} onChange={(event) => setPassword(event.target.value)} placeholder={mode === "signup" ? "At least 8 characters" : "Enter your password"} />
                 {mode === "signup" && <><label htmlFor="confirm-password">Confirm password</label><input id="confirm-password" type="password" autoComplete="new-password" required minLength={8} value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Re-enter your password" /></>}
                 <Button type="submit" className="signin-button" disabled={loading}>{loading ? (mode === "signin" ? "Signing in…" : "Creating account…") : mode === "signin" ? "Sign in" : "Create account"}<ArrowRight data-icon="inline-end" /></Button>
-                {mode === "signin" ? <p className="auth-helper">New to Acadza? <button type="button" onClick={() => switchMode("signup")}>Create a student account</button></p> : <p className="auth-helper">Already have an account? <button type="button" onClick={() => switchMode("signin")}>Sign in</button></p>}
+                {mode === "signin" ? <p className="auth-helper">New to Acadza? <button type="button" onClick={() => switchMode("signup")}>Create an account / request access</button></p> : <p className="auth-helper">Already have an account? <button type="button" onClick={() => switchMode("signin")}>Sign in</button></p>}
                 <p className="secure-note"><LockKeyhole size={13} /> Secured with Acadza authentication</p>
               </form>
-              {mode === "signup" && <p className="signup-policy">Student registration is open. Faculty accounts require administrator authorisation.</p>}
+              {mode === "signup" && <p className="signup-policy">{selectedWorkspace === "faculty" ? "Faculty sign-up submits an access request only. An administrator must approve the faculty role before the review console is available." : "Student registration is open. Faculty access requires administrator approval."}</p>}
             </>
           )}
           <div className="login-footer">By continuing, you agree to use the platform responsibly and report issues in good faith.</div>
